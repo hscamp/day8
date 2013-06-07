@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="aboutme" style="padding-top: 20px">
+	<div class="row-fluid" style="padding-top: 30px">
+		<h2> Welcome! </h2>
+		<hr>
+	</div>
+	<div class="row">
+		<div class="span2"> <img src="/static/img/headshot.jpg" class="img-circle" width="150px"></div>
+		<div class="span10">
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis nibh lectus, nec rutrum metus. Nulla sem diam, dignissim quis egestas nec, interdum vitae ipsum. Sed consectetur, nisl a aliquet ultrices, neque leo eleifend urna, eget volutpat felis erat vitae lorem. Pellentesque ut dolor urna, vitae elementum metus. Morbi hendrerit accumsan velit, et tempus justo posuere vitae. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque sit amet ipsum ut magna mollis porttitor nec sit amet felis. Integer consequat tortor vel sapien mollis consectetur. Mauris ac turpis non tortor vestibulum cursus.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div id="projects" style="padding-top: 20px">
+	<div class="row-fluid" style="padding-top: 30px">
+		<h2> Projects </h2>
+		<hr>
+	</div>
+  	<div class="row">
+  		<div class="span4"> 
+  			<img src="/static/img/project.png" class="img-polaroid" width="300px">
+  		</div>
+		<div class="span7" style="padding-left: 20px">
+			<h3> Walking Crab Toy</h3>
+			<p> For our Design Nature course, I worked on of team of four to create a walking crab toy. 
+				This project was my first exposure to User-Oriented Design, the process by which you design a product for a specific user group, in our case, fourth grade students.
+			</p> 
+			<p> 
+				We learned about incremental design during the course of this project. First, we created sketch models, then a working proof of concept, then the initial prototype, and finally constrcuted a final product and demoed it live to a forth grade audience (who graded us)
+			</p>
+		</div>
+	</div>
+</div>
+
+<div id="contactme" style="padding-top: 20px">
+		<div class="row-fluid" style="padding-top: 30px">
+		<h2> Contact Me </h2>
+		<hr>
+	</div>
+	<div class="row">
+		<div class="alert alert-success" style="display: none;" id="alert_success">
+		    <button type="button" class="close">×</button>
+		    <strong> THANKS! </strong> Your message has been sent.
+		</div>
+	</div>
+	<div class="row">
+		<form class="form-horizontal" action="/" method="post">
+		  	<div class="control-group">
+		    	<label class="control-label" for="inputName">Name</label>
+		    	<div class="controls">
+		      		<input type="text" name="inputName" placeholder="Name">
+		    	</div>
+		  	</div>
+		  	<div class="control-group">
+		    	<label class="control-label" for="inputEmail">Email</label>
+		    	<div class="controls">
+		      		<input type="text" name="inputEmail" placeholder="Email">
+		    	</div>
+		  	</div>
+		  	<div class="control-group">
+		    	<label class="control-label" for="inputMessage">Message</label>
+		    	<div class="controls">
+		      		<textarea rows="6" class="input-xxlarge" name="inputMessage"></textarea>
+		    	</div>
+		  	</div>
+		  	<div class="control-group">
+		    	<div class="controls">
+		      		<button type="submit" class="btn" id="clickme" disabled="disabled">Submit</button>
+		    	</div>
+		  	</div>
+		</form>
+	</div> 
+</div>
+
+<script>
+
+	$(':input').bind('keyup', function() {
+	    if(allFilled()) $('#clickme').removeAttr('disabled');
+	});
+
+	function allFilled() {
+	    var filled = true;
+	    $('body input').each(function() {
+	        if($(this).val() == '') filled = false;
+	    });
+	    return filled;
+	}
+
+	$("#clickme").click(function()
+	{
+		$("#alert_success").css('display', 'block');
+
+	});
+</script>
+{% endblock %}
