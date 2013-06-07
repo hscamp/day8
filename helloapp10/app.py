@@ -1,14 +1,42 @@
 # imports
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask_mail import Mail, Message
  
 # run the app
 app = Flask(__name__)
- 
+
+# config vars 
+app.config.update(
+	DEBUG=True,
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME='sibrampup@gmail.com',
+	MAIL_PASSWORD='SIBpassword'
+)
+
+# instantiate mail object
+mail = Mail(app)
+
 # route for domain
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 # route function (get)
 def hello():
-	return render_template('index.html')
+	if request.method == 'POST':
+		name = request.form['inputName']
+		email = request.form['inputEmail']
+		message = request.form['inputMessage']
+		if name and email and message:
+			msg = Message(
+				'Someone sent me an email from my personal site!',
+				sender = email,
+				recipients= ['sibrampup@gmail.com'])
+			msg.body = "Name: "+ name + "\n" + "Email: " + email + "\n\n" + message
+			mail.send(msg)
+		return render_template('index.html')
+	
+	else:
+		return render_template('index.html')
 
 # route for menu
 @app.route("/menu/", methods=['GET', 'POST'])
@@ -29,3 +57,4 @@ def page_not_found(e):
 # main (runs python file)
 if __name__ == "__main__":
     app.run()
+
